@@ -30,4 +30,3 @@ namespace Generics;
             return max;
         }
     }
-}
