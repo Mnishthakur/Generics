@@ -4,19 +4,41 @@ namespace Generics;
         static void Main()
         {
             Console.WriteLine("Test case 1: Max number is at first position");
-            int maxInt1 = FindMax<int>(9, 2, 1);
+            var intFinder = new Finder<int>(9, 2, 1);
+            int maxInt1 = intFinder.TestMaximum();
             Console.WriteLine("Max number is: " + maxInt1); 
 
             Console.WriteLine("Test case 2: Max number is at second position");
-            float maxFloat2 = FindMax<float>(25.5f, 53.2f, 68.9f);
-            Console.WriteLine("Max number is: " + maxFloat2); 
+            var floatFinder = new Finder<float>(25.5f, 53.2f, 68.9f);
+            float maxFloat2 = floatFinder.TestMaximum();
+            Console.WriteLine("Max number is: " + maxFloat2);
 
             Console.WriteLine("Test case 3: Max string is at third position");
-            string maxString3 = FindMax<string>("apple", "banana", "cherry");
-            Console.WriteLine("Max string is: " + maxString3); 
+            var stringFinder = new Finder<string>("apple", "banana", "cherry");
+            string maxString3 = stringFinder.TestMaximum();
+            Console.WriteLine("Max string is: " + maxString3);
+        }
+    }
+
+    class Finder<T> where T : IComparable
+    {
+        private T a;
+        private T b;
+        private T c;
+
+        public Finder(T a, T b, T c)
+        {
+            this.a = a;
+            this.b = b;
+            this.c = c;
         }
 
-        static T FindMax<T>(T a, T b, T c) where T : IComparable
+        public T TestMaximum()
+        {
+            return FindMax(a, b, c);
+        }
+
+        private static T FindMax(T a, T b, T c)
         {
             T max = a;
             if (b.CompareTo(max) > 0)
